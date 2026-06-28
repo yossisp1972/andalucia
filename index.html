@@ -6,35 +6,41 @@
 
 <title>Spain Trip 🇪🇸</title>
 
-<!-- ✅ FIXED Leaflet -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/distps://unpkg.com/leaflet@1.9.4/dist/cript>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
 body {
   margin:0;
-  font-family:Arial;
-  background:#f4f4f4;
+  font-family: -apple-system, Segoe UI, Roboto;
+  background:#f7f8fb;
+  color:#222;
 }
 
+/* HEADER */
 header {
-  padding:15px;
+  padding:18px;
+  font-size:20px;
+  font-weight:600;
   background:white;
-  font-weight:bold;
-  text-align:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
 
+/* LAYOUT */
 .container {
-  max-width:600px;
+  max-width:680px;
   margin:auto;
   padding:15px;
 }
 
+/* CARDS */
 .card {
   background:white;
-  border-radius:10px;
-  margin-bottom:15px;
+  border-radius:18px;
+  margin-bottom:20px;
   overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  box-shadow:0 8px 25px rgba(0,0,0,0.06);
+  transition:0.2s;
 }
 
 .card img {
@@ -44,40 +50,65 @@ header {
 }
 
 .card-content {
-  padding:12px;
+  padding:16px;
 }
 
+.title {
+  font-size:18px;
+  font-weight:600;
+}
+
+.subtitle {
+  color:#666;
+  margin-top:4px;
+  font-size:14px;
+}
+
+.section {
+  margin-top:10px;
+}
+
+.badge {
+  background:#ffe9e4;
+  color:#ff5a3c;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* MAP */
 #map {
-  height:250px;
-  border-radius:10px;
-  margin:20px 0;
+  height:220px;
+  border-radius:16px;
+  margin-bottom:20px;
 }
 
-/* Tabs */
+/* TABS */
 .tabs {
   display:flex;
-  gap:5px;
+  gap:6px;
   overflow-x:auto;
 }
 
 .tab {
-  padding:8px 10px;
-  background:#ddd;
+  padding:8px 12px;
+  background:#eee;
   border:none;
-  border-radius:15px;
+  border-radius:20px;
   cursor:pointer;
 }
 
 .tab.active {
-  background:#ff6b4a;
+  background:#ff5a3c;
   color:white;
 }
 
 .day {
-  margin-top:10px;
-  padding:10px;
+  margin-top:12px;
   background:#fafafa;
-  border-radius:8px;
+  padding:12px;
+  border-radius:10px;
+  font-size:14px;
 }
 </style>
 </head>
@@ -91,9 +122,9 @@ header {
 <!-- Flights -->
 <div class="card">
 <div class="card-content">
-<b>✈️ Flights</b><br><br>
-🛫 TLV → Málaga — 13:05 → 17:30<br>
-🛬 Málaga → TLV — 20:10 → 01:55 (+1)
+<div class="title">✈️ Flights</div>
+<div class="subtitle">TLV → Málaga — 13:05 → 17:30</div>
+<div class="subtitle">Málaga → TLV — 20:10 → 01:55 (+1)</div>
 </div>
 </div>
 
@@ -101,7 +132,7 @@ header {
 <div class="card">
 <div class="card-content">
 
-<b>📅 Daily Plan</b>
+<div class="title">📅 Daily Plan</div>
 
 <div class="tabs">
 <button class="tab active" onclick="showDay('d1',this)">21</button>
@@ -113,69 +144,64 @@ header {
 <button class="tab" onclick="showDay('d7',this)">28–31</button>
 </div>
 
-<div id="d1" class="day">Arrive Málaga → Sevilla</div>
-<div id="d2" class="day" style="display:none;">Sevilla → Gibraltar</div>
-<div id="d3" class="day" style="display:none;">Ronda → Caminito</div>
-<div id="d4" class="day" style="display:none;">Granada</div>
-<div id="d5" class="day" style="display:none;">Marbella</div>
-<div id="d6" class="day" style="display:none;">Málaga (Hotel Sur)</div>
-<div id="d7" class="day" style="display:none;">Resort (Guadalmar)</div>
+<div id="d1" class="day">✈️ Málaga → Sevilla</div>
+<div id="d2" class="day" style="display:none;">🚗 Sevilla → Gibraltar</div>
+<div id="d3" class="day" style="display:none;">📍 Ronda → Caminito</div>
+<div id="d4" class="day" style="display:none;">🚗 Granada</div>
+<div id="d5" class="day" style="display:none;">🏖️ Marbella</div>
+<div id="d6" class="day" style="display:none;">🏙️ Málaga city stay</div>
+<div id="d7" class="day" style="display:none;">🏖️ Resort stay</div>
 
 </div>
 </div>
 
-<!-- MAP -->
 <div id="map"></div>
 
-<!-- ✅ SEVILLA -->
+<!-- ✅ Sevilla -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiMeP9q1NxU0d3SW0wHZdENT-F1DJ36iZi3atyDWos9Q&s=10">
 <div class="card-content">
-<b>🇪🇸 Sevilla</b><br>
-🏨 Las Casas de los Mercaderes<br>
-📍 Calle Álvarez Quintero 9<br>
-📍 Plaza de España • Alcázar • Cathedral
+<div class="title">🇪🇸 Sevilla <span class="badge">21–22</span></div>
+<div class="section">🏨 Las Casas de los Mercaderes</div>
+<div class="subtitle">📍 Calle Álvarez Quintero 9</div>
+<div class="section">🎯 Plaza de España • Alcázar • Cathedral</div>
 </div>
 </div>
 
-<!-- ✅ MALAGA CITY -->
+<!-- ✅ Málaga city -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcT0vZOnWLiL35sU8wPqpeSp--aWRAlHVY5VpCYIxABF89-_HbLj50D7-9CnjyPYBsKHplKC3qqBqLiFWId8rbFZkfU&s=19">
 <div class="card-content">
-<b>🇪🇸 Málaga 26–28</b><br>
-🏨 Hotel Sur Málaga<br>
-📍 Calle Trinidad Grund 13
+<div class="title">🇪🇸 Málaga <span class="badge">26–28</span></div>
+<div class="section">🏨 Hotel Sur Málaga</div>
+<div class="subtitle">📍 Calle Trinidad Grund 13</div>
 </div>
 </div>
 
-<!-- ✅ RESORT -->
+<!-- ✅ Resort -->
 <div class="card">
 <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHEyAypX6UW4gtrCWDnsLtYoKgwNGKYdPvauulWOf9jpJ0vqT_1gpG-wi2uMVR_21PBxnr2Uj7TNX2edoLXHO557UDWWufgZLVSnMn0kO78HN65n8YGkCLkUwBTeiVm8MCuHHiA=w243-h174-n-k-no-nu">
 <div class="card-content">
-<b>🇪🇸 Málaga 28–31</b><br>
-🏨 Sol Málaga Guadalmar<br>
-📍 Calle Moby Dick 2
+<div class="title">🇪🇸 Málaga <span class="badge">28–31</span></div>
+<div class="section">🏨 Sol Málaga Guadalmar</div>
+<div class="subtitle">📍 Calle Moby Dick 2</div>
 </div>
 </div>
 
 </div>
 
 <script>
-// ✅ MAP FIXED
+// MAP
 const map = L.map('map').setView([36.7,-4.5],7);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-.addTo(map);
-
-// markers
 [[37.3891,-5.9845],[36.7213,-4.4214]]
-.forEach(p => L.marker(p).addTo(map));
+.forEach(p=>L.marker(p).addTo(map));
 
-// ✅ tabs
+// TABS
 function showDay(id, el) {
-  document.querySelectorAll('.day').forEach(d => d.style.display = "none");
-  document.getElementById(id).style.display = "block";
-
+  document.querySelectorAll('.day').forEach(d => d.style.display="none");
+  document.getElementById(id).style.display="block";
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
 }
