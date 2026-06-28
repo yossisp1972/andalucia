@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Spain Trip 🇪🇸</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
-body { margin:0; font-family:-apple-system,Segoe UI; background:#f7f8fb; }
+body {
+  margin:0;
+  font-family:-apple-system,Segoe UI;
+  background:#f7f8fb;
+}
 
 header {
   background:white;
@@ -18,10 +23,12 @@ header {
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* layout */
-.container { max-width:700px; margin:auto; padding:15px; }
+.container {
+  max-width:700px;
+  margin:auto;
+  padding:15px;
+}
 
-/* cards */
 .card {
   background:white;
   border-radius:16px;
@@ -30,7 +37,6 @@ header {
   box-shadow:0 6px 20px rgba(0,0,0,0.06);
 }
 
-.card img { width:100%; height:180px; object-fit:cover; }
 .card-content { padding:14px; }
 
 .title { font-size:18px; font-weight:600; }
@@ -43,34 +49,18 @@ header {
   font-size:12px;
 }
 
-/* bookings highlight */
-.booking {
-  background:#e9f7ef;
-  padding:10px;
-  border-radius:10px;
-  margin-top:8px;
+#map {
+  height:230px;
+  border-radius:16px;
+  margin:20px 0;
 }
 
-.countdown {
-  font-weight:600;
-  color:#ff5a3c;
+.tabs {
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
 }
 
-button.link-btn {
-  margin-top:6px;
-  padding:6px 10px;
-  border:none;
-  border-radius:8px;
-  background:#ff5a3c;
-  color:white;
-  cursor:pointer;
-}
-
-/* map */
-#map { height:230px; border-radius:16px; margin-bottom:20px; }
-
-/* tabs */
-.tabs { display:flex; gap:6px; overflow-x:auto; }
 .tab {
   padding:8px 12px;
   border:none;
@@ -78,13 +68,42 @@ button.link-btn {
   background:#eee;
   cursor:pointer;
 }
-.tab.active { background:#ff5a3c; color:white; }
+
+.tab.active {
+  background:#ff5a3c;
+  color:white;
+}
 
 .day {
   margin-top:10px;
   padding:10px;
   background:#fafafa;
   border-radius:10px;
+}
+
+/* countdown */
+.countdown {
+  font-size:16px;
+  margin-top:6px;
+  color:#ff5a3c;
+  font-weight:600;
+}
+
+/* bookings */
+.booking {
+  background:#e9f7ef;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+button {
+  margin-top:6px;
+  padding:6px 10px;
+  border:none;
+  border-radius:8px;
+  background:#ff5a3c;
+  color:white;
 }
 </style>
 </head>
@@ -95,30 +114,11 @@ button.link-btn {
 
 <div class="container">
 
-<!-- 🔔 IMPORTANT BOOKINGS -->
+<!-- ⏳ FLIGHT COUNTDOWN -->
 <div class="card">
 <div class="card-content">
-
-<div class="title">🔔 Important Bookings</div>
-
-<div class="booking">
-🎟️ <b>Caminito del Rey</b><br>
-⏰ 24 July – 12:20<br>
-⏳ <span id="caminito-countdown" class="countdown"></span><br>
-
-<button class="link-btn" onclick="openMaps(36.905,-4.759)">📍 Directions</button>
-<button class="link-btn" onclick="addCalendar('Caminito del Rey','2026-07-24T12:20:00')">📅 Add to Calendar</button>
-</div>
-
-<div class="booking">
-🏰 <b>Alhambra</b><br>
-⏰ 25 July – 09:00<br>
-⏳ <span id="alhambra-countdown" class="countdown"></span><br>
-
-<button class="link-btn" onclick="openMaps(37.1761,-3.5881)">📍 Directions</button>
-<button class="link-btn" onclick="addCalendar('Alhambra Visit','2026-07-25T09:00:00')">📅 Add to Calendar</button>
-</div>
-
+<div class="title">⏳ Flight Countdown</div>
+<div id="flight-countdown" class="countdown"></div>
 </div>
 </div>
 
@@ -149,7 +149,7 @@ button.link-btn {
 
 <div id="d1" class="day">Málaga → Sevilla</div>
 <div id="d2" class="day" style="display:none;">Sevilla → Gibraltar</div>
-<div id="d3" class="day" style="display:none;">Gibraltar → Ronda → Caminito</div>
+<div id="d3" class="day" style="display:none;">Ronda → Caminito</div>
 <div id="d4" class="day" style="display:none;">Caminito → Granada</div>
 <div id="d5" class="day" style="display:none;">Alhambra → Marbella</div>
 <div id="d6" class="day" style="display:none;">Málaga city stay</div>
@@ -158,8 +158,35 @@ button.link-btn {
 </div>
 </div>
 
-<!-- Map -->
+<!-- MAP -->
 <div id="map"></div>
+
+<!-- 🔔 BOOKINGS (MOVED HERE ✅) -->
+<div class="card">
+<div class="card-content">
+
+<div class="title">🔔 Important Bookings</div>
+
+<div class="booking">
+🎟️ Caminito del Rey<br>
+⏰ 24 July 12:20<br>
+⏳ <span id="caminito"></span><br>
+
+<button onclick="openMaps(36.905,-4.759)">📍 Directions</button>
+<button onclick="addCalendar('Caminito','2026-07-24T12:20:00')">📅 Add</button>
+</div>
+
+<div class="booking">
+🏰 Alhambra<br>
+⏰ 25 July 09:00<br>
+⏳ <span id="alhambra"></span><br>
+
+<button onclick="openMaps(37.1761,-3.5881)">📍 Directions</button>
+<button onclick="addCalendar('Alhambra','2026-07-25T09:00:00')">📅 Add</button>
+</div>
+
+</div>
+</div>
 
 </div>
 
@@ -168,53 +195,56 @@ button.link-btn {
 const map = L.map('map').setView([36.7,-4.5],7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-[
-[37.3891,-5.9845],
-[36.905,-4.759],
-[37.1761,-3.5881],
-[36.7213,-4.4214]
-].forEach(p=>L.marker(p).addTo(map));
+// markers
+[[36.905,-4.759],[37.1761,-3.5881]].forEach(p=>L.marker(p).addTo(map));
 
 // tabs
-function showDay(id, el) {
-  document.querySelectorAll('.day').forEach(d => d.style.display="none");
-  document.getElementById(id).style.display="block";
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+function showDay(id,el){
+document.querySelectorAll('.day').forEach(d=>d.style.display="none");
+document.getElementById(id).style.display="block";
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+el.classList.add('active');
 }
 
-// countdown
-function countdown(id, dateStr){
-  const target = new Date(dateStr);
-  function update(){
-    let now = new Date();
-    let diff = target - now;
+// countdown full (days/hours/min/sec)
+function countdown(id,dateStr){
+  const target=new Date(dateStr);
 
-    if(diff < 0){
-      document.getElementById(id).innerText = "✅ Started!";
+  function update(){
+    const now=new Date();
+    const diff=target-now;
+
+    if(diff<=0){
+      document.getElementById(id).innerText="✅ Started";
       return;
     }
 
-    let h = Math.floor(diff/1000/60/60);
-    let m = Math.floor(diff/1000/60%60);
+    let d=Math.floor(diff/1000/60/60/24);
+    let h=Math.floor(diff/1000/60/60%24);
+    let m=Math.floor(diff/1000/60%60);
+    let s=Math.floor(diff/1000%60);
 
-    document.getElementById(id).innerText = h + "h " + m + "m remaining";
+    document.getElementById(id).innerText=
+      `${d}d ${h}h ${m}m ${s}s`;
   }
+
   setInterval(update,1000);
 }
 
-countdown("caminito-countdown","2026-07-24T12:20:00");
-countdown("alhambra-countdown","2026-07-25T09:00:00");
+// ✅ countdowns
+countdown("flight-countdown","2026-07-21T13:05:00");
+countdown("caminito","2026-07-24T12:20:00");
+countdown("alhambra","2026-07-25T09:00:00");
 
 // maps
 function openMaps(lat,lon){
-  window.open(`https://www.google.com/maps?q=${lat},${lon}`);
+window.open(`https://www.google.com/maps?q=${lat},${lon}`);
 }
 
 // calendar
-function addCalendar(title, dt){
-  let url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dt.replace(/[-:]/g,'')}Z/${dt.replace(/[-:]/g,'')}Z`;
-  window.open(url);
+function addCalendar(title,dt){
+let url=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dt.replace(/[-:]/g,'')}Z/${dt.replace(/[-:]/g,'')}Z`;
+window.open(url);
 }
 </script>
 
