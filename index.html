@@ -12,35 +12,29 @@
 <style>
 body {
   margin:0;
-  font-family: -apple-system, Segoe UI, Roboto;
+  font-family:-apple-system,Segoe UI,Roboto;
   background:#f7f8fb;
-  color:#222;
 }
 
-/* HEADER */
 header {
-  padding:18px;
-  font-size:20px;
-  font-weight:600;
   background:white;
+  padding:16px;
+  font-weight:600;
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* LAYOUT */
 .container {
-  max-width:680px;
+  max-width:700px;
   margin:auto;
   padding:15px;
 }
 
-/* CARDS */
 .card {
   background:white;
-  border-radius:18px;
-  margin-bottom:20px;
+  border-radius:16px;
+  margin-bottom:18px;
   overflow:hidden;
-  box-shadow:0 8px 25px rgba(0,0,0,0.06);
-  transition:0.2s;
+  box-shadow:0 6px 20px rgba(0,0,0,0.06);
 }
 
 .card img {
@@ -50,7 +44,7 @@ header {
 }
 
 .card-content {
-  padding:16px;
+  padding:14px;
 }
 
 .title {
@@ -58,32 +52,26 @@ header {
   font-weight:600;
 }
 
-.subtitle {
-  color:#666;
-  margin-top:4px;
-  font-size:14px;
-}
-
-.section {
-  margin-top:10px;
-}
-
 .badge {
   background:#ffe9e4;
   color:#ff5a3c;
-  padding:4px 10px;
+  padding:3px 10px;
   border-radius:20px;
   font-size:12px;
 }
 
-/* MAP */
+.section {
+  margin-top:8px;
+  color:#555;
+}
+
 #map {
-  height:220px;
+  height:230px;
   border-radius:16px;
   margin-bottom:20px;
 }
 
-/* TABS */
+/* Tabs */
 .tabs {
   display:flex;
   gap:6px;
@@ -92,9 +80,9 @@ header {
 
 .tab {
   padding:8px 12px;
-  background:#eee;
   border:none;
   border-radius:20px;
+  background:#eee;
   cursor:pointer;
 }
 
@@ -104,11 +92,10 @@ header {
 }
 
 .day {
-  margin-top:12px;
+  margin-top:10px;
+  padding:10px;
   background:#fafafa;
-  padding:12px;
   border-radius:10px;
-  font-size:14px;
 }
 </style>
 </head>
@@ -123,8 +110,8 @@ header {
 <div class="card">
 <div class="card-content">
 <div class="title">✈️ Flights</div>
-<div class="subtitle">TLV → Málaga — 13:05 → 17:30</div>
-<div class="subtitle">Málaga → TLV — 20:10 → 01:55 (+1)</div>
+<div class="section">TLV → Málaga — 13:05 → 17:30</div>
+<div class="section">Málaga → TLV — 20:10 → 01:55 (+1)</div>
 </div>
 </div>
 
@@ -155,50 +142,104 @@ header {
 </div>
 </div>
 
+<!-- MAP -->
 <div id="map"></div>
 
-<!-- ✅ Sevilla -->
+<!-- SEVILLA -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiMeP9q1NxU0d3SW0wHZdENT-F1DJ36iZi3atyDWos9Q&s=10">
 <div class="card-content">
 <div class="title">🇪🇸 Sevilla <span class="badge">21–22</span></div>
 <div class="section">🏨 Las Casas de los Mercaderes</div>
-<div class="subtitle">📍 Calle Álvarez Quintero 9</div>
+<div class="section">📍 Calle Álvarez Quintero 9</div>
 <div class="section">🎯 Plaza de España • Alcázar • Cathedral</div>
 </div>
 </div>
 
-<!-- ✅ Málaga city -->
+<!-- GIBRALTAR -->
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzDShTmoUPCkXgXjvXDaoLOLmYZemSClYbhMY3u4qodVkAF2eyZRhfO84&s=10">
+<div class="card-content">
+<div class="title">🇬🇧 Gibraltar <span class="badge">22–23</span></div>
+<div class="section">🏨 Bristol Hotel</div>
+<div class="section">📍 Cathedral Square</div>
+<div class="section">🎯 Rock • Cave • Monkeys</div>
+</div>
+</div>
+
+<!-- CAMINITO -->
+<div class="card">
+<img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHk5f408w8peg27ElE5FQwzfhkuzKFIC4zGvbQcuHkqy93hiElHsf_-duLdRi_m1ywOP_UxD_3FZDVz7aG-YKGEUK0r6jVib2Q-ac7hLaZT8yRzwjTvcTfDzaZcjzS2_VOWRUPj=s1360-w1360-h1020-rw">
+<div class="card-content">
+<div class="title">🇪🇸 Caminito del Rey <span class="badge">23–24</span></div>
+<div class="section">🏨 La Garganta</div>
+<div class="section">📍 El Chorro / Ardales</div>
+<div class="section">🎯 Cliff walk • Bridges • Canyon views</div>
+</div>
+</div>
+
+<!-- GRANADA -->
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNVJDBE-ZrtQ-5eHFqWKhp1sYHy8-tg0en1sHiOgF2NQ&s=10">
+<div class="card-content">
+<div class="title">🇪🇸 Granada <span class="badge">24–25</span></div>
+<div class="section">🏨 Eurostars Puerta Real</div>
+<div class="section">📍 Calle Acera del Darro 24</div>
+<div class="section">🎯 Alhambra • Albaicín • Mirador</div>
+</div>
+</div>
+
+<!-- MARBELLA -->
+<div class="card">
+<img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRtPn7L3vob5LwoGctcF0qwBWQmuKgDMO5H2Xl8tIJfqk7_x5nROszX1QVNQlfoB0FWQJtTqFJIuXvijWPU9LiJZus&s=19">
+<div class="card-content">
+<div class="title">🇪🇸 Marbella <span class="badge">25–26</span></div>
+<div class="section">🏨 NH San Pedro</div>
+<div class="section">📍 Calle Jerez 1</div>
+<div class="section">🎯 Old town • Marina • Beaches</div>
+</div>
+</div>
+
+<!-- MALAGA CITY -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcT0vZOnWLiL35sU8wPqpeSp--aWRAlHVY5VpCYIxABF89-_HbLj50D7-9CnjyPYBsKHplKC3qqBqLiFWId8rbFZkfU&s=19">
 <div class="card-content">
 <div class="title">🇪🇸 Málaga <span class="badge">26–28</span></div>
 <div class="section">🏨 Hotel Sur Málaga</div>
-<div class="subtitle">📍 Calle Trinidad Grund 13</div>
+<div class="section">📍 Calle Trinidad Grund 13</div>
 </div>
 </div>
 
-<!-- ✅ Resort -->
+<!-- RESORT -->
 <div class="card">
 <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHEyAypX6UW4gtrCWDnsLtYoKgwNGKYdPvauulWOf9jpJ0vqT_1gpG-wi2uMVR_21PBxnr2Uj7TNX2edoLXHO557UDWWufgZLVSnMn0kO78HN65n8YGkCLkUwBTeiVm8MCuHHiA=w243-h174-n-k-no-nu">
 <div class="card-content">
 <div class="title">🇪🇸 Málaga <span class="badge">28–31</span></div>
 <div class="section">🏨 Sol Málaga Guadalmar</div>
-<div class="subtitle">📍 Calle Moby Dick 2</div>
+<div class="section">📍 Calle Moby Dick 2</div>
+<div class="section">🌴 Resort • Beach • Relax</div>
 </div>
 </div>
 
 </div>
 
 <script>
-// MAP
+// Map
 const map = L.map('map').setView([36.7,-4.5],7);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-[[37.3891,-5.9845],[36.7213,-4.4214]]
-.forEach(p=>L.marker(p).addTo(map));
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+.addTo(map);
 
-// TABS
+[
+[37.3891,-5.9845],
+[36.1408,-5.3536],
+[36.905,-4.759],
+[37.1773,-3.5986],
+[36.5101,-4.8825],
+[36.7213,-4.4214]
+].forEach(p => L.marker(p).addTo(map));
+
+// Tabs
 function showDay(id, el) {
   document.querySelectorAll('.day').forEach(d => d.style.display="none");
   document.getElementById(id).style.display="block";
