@@ -6,9 +6,8 @@
 
 <title>Spain Trip 🇪🇸</title>
 
-<!-- ✅ Leaflet FIX -->
-https://unpkg.com/leaflet@1.9.4/dist/leaflet.css
-https://unpkg.com/leaflet@1.9.4/dist/leaflet.js</script>
+<!-- ✅ FIXED Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/distps://unpkg.com/leaflet@1.9.4/dist/cript>
 
 <style>
 body {
@@ -18,27 +17,18 @@ body {
 }
 
 header {
-  background:white;
   padding:15px;
+  background:white;
   font-weight:bold;
   text-align:center;
 }
 
-/* container */
 .container {
   max-width:600px;
   margin:auto;
   padding:15px;
 }
 
-/* map */
-#map {
-  height:250px;
-  margin:20px 0;
-  border-radius:10px;
-}
-
-/* cards */
 .card {
   background:white;
   border-radius:10px;
@@ -47,7 +37,6 @@ header {
   box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* ✅ THIS FIXES YOUR IMAGE ISSUE */
 .card img {
   width:100%;
   height:180px;
@@ -58,6 +47,13 @@ header {
   padding:12px;
 }
 
+#map {
+  height:250px;
+  border-radius:10px;
+  margin:20px 0;
+}
+
+/* Tabs */
 .tabs {
   display:flex;
   gap:5px;
@@ -117,13 +113,13 @@ header {
 <button class="tab" onclick="showDay('d7',this)">28–31</button>
 </div>
 
-<div id="d1" class="day">✈️ Málaga → Sevilla</div>
-<div id="d2" class="day" style="display:none;">🚗 Sevilla → Gibraltar</div>
-<div id="d3" class="day" style="display:none;">📍 Ronda → Caminito</div>
-<div id="d4" class="day" style="display:none;">🚗 Granada</div>
-<div id="d5" class="day" style="display:none;">🏖️ Marbella</div>
-<div id="d6" class="day" style="display:none;">🏙️ Málaga city stay (Hotel Sur)</div>
-<div id="d7" class="day" style="display:none;">🏝️ Resort stay (Guadalmar)</div>
+<div id="d1" class="day">Arrive Málaga → Sevilla</div>
+<div id="d2" class="day" style="display:none;">Sevilla → Gibraltar</div>
+<div id="d3" class="day" style="display:none;">Ronda → Caminito</div>
+<div id="d4" class="day" style="display:none;">Granada</div>
+<div id="d5" class="day" style="display:none;">Marbella</div>
+<div id="d6" class="day" style="display:none;">Málaga (Hotel Sur)</div>
+<div id="d7" class="day" style="display:none;">Resort (Guadalmar)</div>
 
 </div>
 </div>
@@ -131,7 +127,7 @@ header {
 <!-- MAP -->
 <div id="map"></div>
 
-<!-- Sevilla -->
+<!-- ✅ SEVILLA -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiMeP9q1NxU0d3SW0wHZdENT-F1DJ36iZi3atyDWos9Q&s=10">
 <div class="card-content">
@@ -142,7 +138,7 @@ header {
 </div>
 </div>
 
-<!-- Malaga -->
+<!-- ✅ MALAGA CITY -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcT0vZOnWLiL35sU8wPqpeSp--aWRAlHVY5VpCYIxABF89-_HbLj50D7-9CnjyPYBsKHplKC3qqBqLiFWId8rbFZkfU&s=19">
 <div class="card-content">
@@ -152,7 +148,7 @@ header {
 </div>
 </div>
 
-<!-- Resort -->
+<!-- ✅ RESORT -->
 <div class="card">
 <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHEyAypX6UW4gtrCWDnsLtYoKgwNGKYdPvauulWOf9jpJ0vqT_1gpG-wi2uMVR_21PBxnr2Uj7TNX2edoLXHO557UDWWufgZLVSnMn0kO78HN65n8YGkCLkUwBTeiVm8MCuHHiA=w243-h174-n-k-no-nu">
 <div class="card-content">
@@ -165,7 +161,7 @@ header {
 </div>
 
 <script>
-// MAP
+// ✅ MAP FIXED
 const map = L.map('map').setView([36.7,-4.5],7);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
@@ -173,12 +169,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
 
 // markers
 [[37.3891,-5.9845],[36.7213,-4.4214]]
-.forEach(p=>L.marker(p).addTo(map));
+.forEach(p => L.marker(p).addTo(map));
 
-// tabs
+// ✅ tabs
 function showDay(id, el) {
-  document.querySelectorAll('.day').forEach(d => d.style.display="none");
-  document.getElementById(id).style.display="block";
+  document.querySelectorAll('.day').forEach(d => d.style.display = "none");
+  document.getElementById(id).style.display = "block";
 
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
