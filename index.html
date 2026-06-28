@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Spain Trip 🇪🇸</title>
 
-<!-- ✅ Leaflet -->
+<!-- Leaflet -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
 body {
   margin:0;
-  font-family:-apple-system,Segoe UI;
+  font-family:-apple-system,Segoe UI,Roboto;
   background:#f7f8fb;
 }
 
@@ -30,7 +29,7 @@ header {
   padding:15px;
 }
 
-/* Cards */
+/* cards */
 .card {
   background:white;
   border-radius:16px;
@@ -49,22 +48,42 @@ header {
 
 .title { font-size:18px; font-weight:600; }
 
-.badge {
-  background:#ffe9e4;
-  color:#ff5a3c;
-  padding:3px 10px;
-  border-radius:20px;
-  font-size:12px;
-}
-
-/* Map */
+/* MAP */
 #map {
   height:230px;
   border-radius:16px;
   margin:20px 0;
 }
 
-/* Tabs */
+/* WEATHER UI */
+.weather {
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#dff1ff,#f2f9ff);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:14px;
+}
+
+.weather .temp {
+  font-size:18px;
+  font-weight:600;
+}
+
+.weather .icon {
+  font-size:20px;
+}
+
+/* countdown */
+.countdown {
+  font-weight:600;
+  color:#ff5a3c;
+  margin-top:6px;
+}
+
+/* tabs */
 .tabs {
   display:flex;
   gap:6px;
@@ -90,32 +109,6 @@ header {
   background:#fafafa;
   border-radius:10px;
 }
-
-/* Countdown */
-.countdown {
-  font-weight:600;
-  color:#ff5a3c;
-  margin-top:6px;
-}
-
-/* Booking */
-.booking {
-  background:#e9f7ef;
-  padding:10px;
-  border-radius:10px;
-  margin-top:10px;
-}
-
-/* Buttons */
-button {
-  margin-top:6px;
-  padding:6px 10px;
-  border:none;
-  border-radius:8px;
-  background:#ff5a3c;
-  color:white;
-  cursor:pointer;
-}
 </style>
 </head>
 
@@ -125,7 +118,7 @@ button {
 
 <div class="container">
 
-<!-- ⏳ Flight Countdown -->
+<!-- FLIGHT COUNTDOWN -->
 <div class="card">
 <div class="card-content">
 <div class="title">⏳ Flight Countdown</div>
@@ -133,16 +126,7 @@ button {
 </div>
 </div>
 
-<!-- Flights -->
-<div class="card">
-<div class="card-content">
-<div class="title">✈️ Flights</div>
-<p>TLV → Málaga — 13:05 → 17:30</p>
-<p>Málaga → TLV — 20:10 → 01:55 (+1)</p>
-</div>
-</div>
-
-<!-- Tabs -->
+<!-- TABS -->
 <div class="card">
 <div class="card-content">
 
@@ -160,166 +144,135 @@ button {
 
 <div id="d1" class="day">Málaga → Sevilla</div>
 <div id="d2" class="day" style="display:none;">Sevilla → Gibraltar</div>
-<div id="d3" class="day" style="display:none;">Gibraltar → Ronda → Caminito</div>
-<div id="d4" class="day" style="display:none;">Caminito → Granada</div>
-<div id="d5" class="day" style="display:none;">Alhambra (09:00) → Marbella</div>
-<div id="d6" class="day" style="display:none;">Málaga city stay</div>
-<div id="d7" class="day" style="display:none;">Resort stay</div>
+<div id="d3" class="day" style="display:none;">Ronda → Caminito</div>
+<div id="d4" class="day" style="display:none;">Granada</div>
+<div id="d5" class="day" style="display:none;">Alhambra → Marbella</div>
+<div id="d6" class="day" style="display:none;">Málaga city</div>
+<div id="d7" class="day" style="display:none;">Resort</div>
 
 </div>
 </div>
 
-<!-- Map -->
+<!-- MAP -->
 <div id="map"></div>
 
-<!-- Bookings -->
-<div class="card">
-<div class="card-content">
-<div class="title">🔔 Important Bookings</div>
-
-<div class="booking">
-🎟️ Caminito del Rey<br>
-⏰ 24 July 12:20<br>
-⏳ <span id="caminito"></span><br>
-<button onclick="openMaps(36.905,-4.759)">📍 Directions</button>
-</div>
-
-<div class="booking">
-🏰 Alhambra<br>
-⏰ 25 July 09:00<br>
-⏳ <span id="alhambra"></span><br>
-<button onclick="openMaps(37.1761,-3.5881)">📍 Directions</button>
-</div>
-
-</div>
-</div>
-
-<!-- ✅ CARDS -->
-
+<!-- SEVILLA -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiMeP9q1NxU0d3SW0wHZdENT-F1DJ36iZi3atyDWos9Q&s=10">
 <div class="card-content">
-<div class="title">🇪🇸 Sevilla (21-22)</div>
+<div class="title">🇪🇸 Sevilla</div>
 <p>🏨 Las Casas de los Mercaderes</p>
 <p>📍 Calle Álvarez Quintero 9</p>
-<p>🎯 Plaza de España • Alcázar • Cathedral</p>
+<div id="sevilla-weather" class="weather"></div>
 </div>
 </div>
 
+<!-- GIBRALTAR -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzDShTmoUPCkXgXjvXDaoLOLmYZemSClYbhMY3u4qodVkAF2eyZRhfO84&s=10">
 <div class="card-content">
-<div class="title">🇬🇧 Gibraltar (22-23)</div>
+<div class="title">🇬🇧 Gibraltar</div>
 <p>🏨 Bristol Hotel</p>
-<p>📍 Cathedral Square</p>
-<p>🎯 Things To Do - Rock • Cave • Monkeys</p>
+<div id="gib-weather" class="weather"></div>
 </div>
 </div>
 
+<!-- CAMINITO -->
 <div class="card">
 <img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHk5f408w8peg27ElE5FQwzfhkuzKFIC4zGvbQcuHkqy93hiElHsf_-duLdRi_m1ywOP_UxD_3FZDVz7aG-YKGEUK0r6jVib2Q-ac7hLaZT8yRzwjTvcTfDzaZcjzS2_VOWRUPj=s1360-w1360-h1020-rw">
 <div class="card-content">
-<div class="title">🇪🇸 Caminito del Rey (23-24)</div>
+<div class="title">🇪🇸 Caminito del Rey</div>
 <p>🏨 La Garganta</p>
-<p>📍 El Chorro / Ardales</p>
-<p>🎯 Things To Do -  Cliff walk • Bridges • Canyon views</p>
+<div id="caminito-weather" class="weather"></div>
 </div>
 </div>
 
+<!-- GRANADA -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNVJDBE-ZrtQ-5eHFqWKhp1sYHy8-tg0en1sHiOgF2NQ&s=10">
 <div class="card-content">
-<div class="title">🇪🇸 Granada (24-25)</div>
+<div class="title">🇪🇸 Granada</div>
 <p>🏨 Eurostars Puerta Real</p>
-<p>📍 Calle Acera del Darro 24</p>
-<p>🎯 Things To Do - Alhambra • Albaicín • Mirador</p>
+<div id="granada-weather" class="weather"></div>
 </div>
 </div>
 
+<!-- MARBELLA -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRtPn7L3vob5LwoGctcF0qwBWQmuKgDMO5H2Xl8tIJfqk7_x5nROszX1QVNQlfoB0FWQJtTqFJIuXvijWPU9LiJZus&s=19">
 <div class="card-content">
-<div class="title">🇪🇸 Marbella (25-26)</div>
-<p>🏨 NH San Pedro</p>
-<p>📍 Calle Jerez 1</p>
-<p>🎯 Things To Do - Old town • Beach • Marina</p>
+<div class="title">🇪🇸 Marbella</div>
+<div id="marbella-weather" class="weather"></div>
 </div>
 </div>
 
+<!-- MALAGA -->
 <div class="card">
 <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcT0vZOnWLiL35sU8wPqpeSp--aWRAlHVY5VpCYIxABF89-_HbLj50D7-9CnjyPYBsKHplKC3qqBqLiFWId8rbFZkfU&s=19">
 <div class="card-content">
-<div class="title">🇪🇸 Málaga (26–28)</div>
-<p>🏨 Hotel Sur Málaga</p>
-<p>📍 Calle Trinidad Grund 13</p>
-<p>🎯 Things To Do - City Center</p>
-</div>
-</div>
-
-<div class="card">
-<img src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAHEyAypX6UW4gtrCWDnsLtYoKgwNGKYdPvauulWOf9jpJ0vqT_1gpG-wi2uMVR_21PBxnr2Uj7TNX2edoLXHO557UDWWufgZLVSnMn0kO78HN65n8YGkCLkUwBTeiVm8MCuHHiA=w243-h174-n-k-no-nu">
-<div class="card-content">
-<div class="title">🇪🇸 Málaga (28–31)</div>
-<p>🏨 Sol Málaga Guadalmar</p>
-<p>📍 Calle Moby Dick 2</p>
-<p>🎯 Things To Do - Nothing , just relax</p>
+<div class="title">🇪🇸 Málaga</div>
+<div id="malaga-weather" class="weather"></div>
 </div>
 </div>
 
 </div>
 
 <script>
-// Map
+// MAP
 const map = L.map('map').setView([36.7,-4.5],7);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-[
-[37.3891,-5.9845],
-[36.1408,-5.3536],
-[36.905,-4.759],
-[37.1773,-3.5986],
-[36.5101,-4.8825],
-[36.7213,-4.4214]
-].forEach(p=>L.marker(p).addTo(map));
-
-// Tabs
-function showDay(id,el){
-document.querySelectorAll('.day').forEach(d=>d.style.display="none");
-document.getElementById(id).style.display="block";
-document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-el.classList.add('active');
+// countdown
+function countdown(id,date){
+ const t=new Date(date);
+ function update(){
+  let diff=t-new Date();
+  if(diff<=0) return document.getElementById(id).innerText="Started";
+  let d=Math.floor(diff/86400000);
+  let h=Math.floor(diff/3600000%24);
+  let m=Math.floor(diff/60000%60);
+  let s=Math.floor(diff/1000%60);
+  document.getElementById(id).innerText=`${d}d ${h}h ${m}m ${s}s`;
+ }
+ setInterval(update,1000);
 }
-
-// Countdown
-function countdown(id,dateStr){
-let target=new Date(dateStr);
-function update(){
-let now=new Date();
-let diff=target-now;
-
-if(diff<=0){
-document.getElementById(id).innerText="✅ Started";
-return;
-}
-
-let d=Math.floor(diff/1000/60/60/24);
-let h=Math.floor(diff/1000/60/60%24);
-let m=Math.floor(diff/1000/60%60);
-let s=Math.floor(diff/1000%60);
-
-document.getElementById(id).innerText=`${d}d ${h}h ${m}m ${s}s`;
-}
-setInterval(update,1000);
-}
-
 countdown("flight-countdown","2026-07-21T13:05:00");
-countdown("caminito","2026-07-24T12:20:00");
-countdown("alhambra","2026-07-25T09:00:00");
 
-// Maps
-function openMaps(lat,lon){
-window.open(`https://www.google.com/maps?q=${lat},${lon}`);
+// tabs
+function showDay(id,el){
+ document.querySelectorAll('.day').forEach(d=>d.style.display="none");
+ document.getElementById(id).style.display="block";
+ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+ el.classList.add('active');
 }
+
+// WEATHER UI
+function icon(c){
+ if(c===0) return "☀️";
+ if(c<=2) return "🌤️";
+ if(c<=3) return "☁️";
+ if(c<=48) return "🌫️";
+ if(c<=67) return "🌧️";
+ return "⛈️";
+}
+
+async function w(lat,lon,id){
+ let r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weathercode`);
+ let d=await r.json();
+ document.getElementById(id).innerHTML = `
+   <div class="icon">${icon(d.current.weathercode)}</div>
+   <div class="temp">${d.current.temperature_2m}°C</div>
+   <div>Now</div>
+ `;
+}
+
+// calls
+w(37.3891,-5.9845,"sevilla-weather");
+w(36.1408,-5.3536,"gib-weather");
+w(36.905,-4.759,"caminito-weather");
+w(37.1773,-3.5986,"granada-weather");
+w(36.5101,-4.8825,"marbella-weather");
+w(36.7213,-4.4214,"malaga-weather");
 </script>
 
 </body>
